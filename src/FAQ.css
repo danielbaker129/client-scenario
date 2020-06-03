@@ -1,0 +1,22 @@
+.section {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 10vw;
+    padding-top: 2vh;
+    margin-top: 0px;
+}
+
+.about-header{
+    margin-bottom:20px
+}
+
+.section-header {
+    text-align: left;
+    color: rgb(255, 243, 132);
+    
+   
+}
+
+.section-content {
+    text-align: left;
+}

@@ -1,0 +1,20 @@
+.wrapper{
+  /* background-color: rgb(255, 242, 73); */
+  border-bottom: 5px;
+  border-color: #ffffff;
+  /* padding: 33px 0 25px 15px; */
+}
+
+.navbar,
+.navbar-default {
+    background-color: rgb(37, 39, 51) !important;
+    color: white;
+}
+
+.yellowTop {
+  /* color: yellow; */
+  color: white;
+  /* border-bottom: solid; */
+  /* border-color: yellow; */
+  /* height: 30px; */
+}

@@ -1,0 +1,27 @@
+.access-information {
+    text-align: center;
+    margin-top: 20px;
+    border: double;
+    border-color: rgb(255, 243, 132);
+    padding: 20px;
+}
+
+.initial-screen {
+    margin-left: 0px;
+    text-align: center;
+    padding-bottom: 10px;
+    /* padding-left: 20px; */
+    background-image: url('https://thumbs.dreamstime.com/b/landscape-travel-tourism-pair-feet-shoes-against-background-mountains-landscape-travel-tourism-pair-99746206.jpg');
+    background-size: cover; 
+    height: cover;
+    width: cover;
+}
+
+.initial-info {
+    padding: 20px;
+    background-color: rgba(78, 78, 78, 0.75);
+    margin: 20px;
+    border: double;
+    border-color: rgba(97, 97, 97, 0.75);
+    /* border- */
+}

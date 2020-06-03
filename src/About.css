@@ -1,0 +1,44 @@
+.section {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 10vw;
+    padding-top: 2vh;
+    margin-top: 0px;
+}
+
+.about-header{
+    margin-bottom:20px
+}
+
+.section-header {
+    text-align: left;
+    color: rgb(255, 243, 132);
+    
+   
+}
+
+.materials-header{
+    margin-bottom:20px;
+    text-align: center;
+    color: rgb(255, 243, 132);
+}
+
+.section-content {
+    text-align: left;
+}
+
+.materials-header {
+    flex:1;
+    text-align: center;
+    justify-content:"center";
+}
+
+.material-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.material-label {
+    margin-top: 2vh;
+}
