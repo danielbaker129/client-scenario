@@ -3,7 +3,7 @@ import './App.css';
 import About from './About.js';
 import FAQ from './FAQ.js';
 import Header from './Header.js';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './Login.js';
 import Home from './Home'
 import { Container } from 'react-bootstrap'
