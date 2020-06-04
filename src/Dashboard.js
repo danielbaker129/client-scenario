@@ -5,6 +5,15 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const Dashboard = ({ allUsers }) => {
+
+    const[getReward, setReward] = React.useState(true);
+
+    const changeReward = ()=>{
+        if(getReward){
+          alert("Come back soon! =)")
+        }
+    }
+
     return (
         <div className="dashboard">
             <h3 className="table-header">All users</h3>
@@ -18,12 +27,6 @@ const Dashboard = ({ allUsers }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* <tr>
-                    <td>example</td>
-                    <td>email@example.com</td>
-                    <td>3</td>
-                    <td>N/A</td>
-                    </tr> */}
                     {allUsers.map(user => {
                         return (
                             <tr>
@@ -32,9 +35,9 @@ const Dashboard = ({ allUsers }) => {
                                 <td>{user.points}</td>
                                 <td>
                                 <DropdownButton variant="warning" id="dropdown-item-button" title="N/A">
-                                    {/* <Dropdown.Item as="button">No rewards</Dropdown.Item> */}
                                     <Dropdown.Item as="button">Yes</Dropdown.Item>
                                     <Dropdown.Item as="button">No</Dropdown.Item>
+                                    <Dropdown.Item as="button">No rewards</Dropdown.Item>
                                 </DropdownButton>
                                
                                 </td>

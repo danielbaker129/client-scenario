@@ -37,17 +37,13 @@ class App extends Component {
       for (let item in users) {
         temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code:item});
       }
-      //console.log(temp);
       this.setState({
         allUsers: temp,
       });
     });
-    // console.log("all",all)
-    // this.setState({allUsers: all});
     const data = this.props.firebase.user(this.state.authUser.uid);
     data.on('value', (snapshot) => {
       let user = snapshot.val();
-      //console.log("user data", user);
       this.setState({
         points: user.points,
         code: this.state.authUser.uid,
