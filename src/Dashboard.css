@@ -1,0 +1,12 @@
+.dashboard {
+    margin-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.user-table {
+    background-color:rgb(255, 250, 210);
+}
+
+.table-header {
+    padding-bottom: 3vh;
+}

@@ -4,6 +4,7 @@
     border: double;
     border-color: rgb(255, 243, 132);
     padding: 20px;
+    border-radius: 12px; 
 }
 
 .initial-screen {
@@ -11,7 +12,9 @@
     text-align: center;
     padding-bottom: 10px;
     /* padding-left: 20px; */
-    background-image: url('https://thumbs.dreamstime.com/b/landscape-travel-tourism-pair-feet-shoes-against-background-mountains-landscape-travel-tourism-pair-99746206.jpg');
+    /* background-image: url('https://thumbs.dreamstime.com/b/landscape-travel-tourism-pair-feet-shoes-against-background-mountains-landscape-travel-tourism-pair-99746206.jpg'); */
+    /* background-image: url('https://i.insider.com/59b17c51609c3030008b4dca?width=1100&format=jpeg&auto=webp'); */
+    background-image: url('https://www.abc.net.au/cm/rimage/10451186-16x9-xlarge.jpg?v=2');
     background-size: cover; 
     height: cover;
     width: cover;

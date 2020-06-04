@@ -11,6 +11,7 @@ import SignUpDialog from './SignUpForm'
 import SignInDialog from './SignInForm'
 import { withFirebase } from './Firebase';
 import PrivateRoute from './ProtectedRoute'
+import Dashboard from './Dashboard.js';
 
 class App extends Component {
   constructor() {
@@ -22,18 +23,35 @@ class App extends Component {
       email: "",
       points: 10,
       code: "",
+      username: "",
+      allUsers: [],
     }
   }
 
   setData = (authUser) => {
     this.setState({ authUser })
+    const all = this.props.firebase.users();
+    all.on('value', (snapshot)=>{
+      let users = snapshot.val();
+      let temp = [];
+      for (let item in users) {
+        temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code:item});
+      }
+      //console.log(temp);
+      this.setState({
+        allUsers: temp,
+      });
+    });
+    // console.log("all",all)
+    // this.setState({allUsers: all});
     const data = this.props.firebase.user(this.state.authUser.uid);
     data.on('value', (snapshot) => {
       let user = snapshot.val();
-      console.log("user data", user);
+      //console.log("user data", user);
       this.setState({
         points: user.points,
-        code: this.state.authUser.uid
+        code: this.state.authUser.uid,
+        username: user.username
       });
     })
   }
@@ -140,13 +158,14 @@ class App extends Component {
     return (
       <Router>
         <div className="edges" style={{ minHeight: "100vh" }}>
-          <Header authUser={this.state.authUser} onSignUp={this.onSignUp} onSignIn={this.onSignIn} />
+          <Header authUser={this.state.authUser} username={this.state.username} onSignUp={this.onSignUp} onSignIn={this.onSignIn} />
           {this.state.isSignUp ? <SignUpDialog onClose={this.onClose} /> : null}
           {this.state.isSignIn ? <SignInDialog onClose={this.onClose} /> : null}
           <Container fluid className="text-light" style={{ minHeight: "100vh", width: "80vw" }}>
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/FAQ" component={FAQ} />
+              <Route path='/dashboard' component={() => <Dashboard allUsers={this.state.allUsers} />} />
               <Route path="/" component={() => <Home code={this.state.code} points={this.state.points} authUser={this.state.authUser} incrementFacebook={this.incrementFacebook} incrementTwitter={this.incrementTwitter} />} />
             </Switch>
           </Container>

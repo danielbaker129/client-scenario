@@ -55,7 +55,7 @@ class Home extends Component {
                         Facebook! Check out our FAQ page for more information about prizes and about other questions you might have.
                      </h5> */} 
                     <h4>Your Referral Code:</h4><br/>
-                    <h5>{this.props.code}</h5><br/>
+                    <h3>{this.props.code}</h3><br/>
                     {/* <h5>Total Points: {this.props.points}</h5> */}
                     <h6>Share Your Code</h6>
                     <Button variant="warning" onClick={this.props.incrementTwitter}>

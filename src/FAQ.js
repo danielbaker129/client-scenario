@@ -5,7 +5,10 @@ class FAQ extends Component {
     render() {
         return (
             <div>
-            <img src="https://i1.wp.com/www.additudemag.com/wp-content/uploads/2020/04/boy-jumping-near-grass-at-daytime-1104014.jpg?resize=1280%2C720px&ssl=1"
+            {/* <img src="https://i1.wp.com/www.additudemag.com/wp-content/uploads/2020/04/boy-jumping-near-grass-at-daytime-1104014.jpg?resize=1280%2C720px&ssl=1"
+            style={{width:'60vw', marginLeft: '10vw', marginRight: '10vw', marginTop: '5vh', marginBottom: '5vh'}}
+                /> */}
+            <img src="https://thenorthernquota.org/sites/default/files/styles/article_main/public/adult-adventure-backpack-287240.jpg?itok=-Na3jqeu"
             style={{width:'60vw', marginLeft: '10vw', marginRight: '10vw', marginTop: '5vh', marginBottom: '5vh'}}
                 />
             <div className="section">
