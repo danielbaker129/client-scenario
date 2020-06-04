@@ -53,7 +53,7 @@ class Home extends Component {
                         You can find your access code displayed below. Share it with your friends to earn points! Earn earn enough points,
                         and you can get cool prizes and NormWear swag. You can even get started by sharing your access code on Twitter or 
                         Facebook! Check out our FAQ page for more information about prizes and about other questions you might have.
-                     </h5> */}
+                     </h5> */} 
                     <h4>Your Referral Code:</h4><br/>
                     <h5>{this.props.code}</h5><br/>
                     {/* <h5>Total Points: {this.props.points}</h5> */}
@@ -62,12 +62,15 @@ class Home extends Component {
                     <img src="https://image.flaticon.com/icons/png/512/23/23931.png" 
                     style={{height:20, width:20}}/>
                      <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"
-    >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        style={{color:"black"}}
+                     >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </Button>{' '}
                     <Button variant="warning" onClick={this.props.incrementFacebook}>
                     <img src="https://cdn.iconscout.com/icon/free/png-256/facebook-social-media-fb-logo-square-44659.png" 
                     style={{height:20, width:20}}/>
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvirginia.edu%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnormwear.netlify.app%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"
+                        style={{color:"black"}}
+                    >Share</a>
                     </Button>
                    
                  </div>
@@ -121,7 +124,7 @@ class Home extends Component {
                 <h7>
                     Upon signing up / logging in, you'll be able to access your referral code, which you can share with others to gain points -
                     earn enough points, and you can get cool rewards and NormWear swag.<br/><br/>
-                    If you're a first-time user who was directed to this site with a referral code, don't forget to submit the code when you sign up!
+                    If you're a first-time user who was directed to this site with a referral code, don't forget to submit a referral code when you sign up!
                 </h7><br/><br/>
                 <h5>Ready to get started? Then sign up or log in to see more!</h5>
                 </div>

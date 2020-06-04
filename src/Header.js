@@ -6,7 +6,7 @@ import SignOutButton from './SignOut';
 const Header = ({ authUser, onSignIn, onSignUp }) => (
             <div className="wrapper" >
             <div className='yellowTop'>
-        <Navbar bg="light" className="color-nav">
+        <Navbar bg="light" className="color-nav" >
             <Navbar.Brand style={{ fontSize:"40px", fontWeight:"bold", color:"white"}} href="/">&#128095; NormWear</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
