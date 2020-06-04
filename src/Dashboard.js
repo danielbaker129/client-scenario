@@ -31,7 +31,7 @@ const Dashboard = ({ allUsers }) => {
                                 <td>{user.email}</td>
                                 <td>{user.points}</td>
                                 <td>
-                                <DropdownButton id="dropdown-item-button" title="N/A">
+                                <DropdownButton variant="warning" id="dropdown-item-button" title="N/A">
                                     {/* <Dropdown.Item as="button">No rewards</Dropdown.Item> */}
                                     <Dropdown.Item as="button">Yes</Dropdown.Item>
                                     <Dropdown.Item as="button">No</Dropdown.Item>
