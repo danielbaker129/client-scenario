@@ -35,7 +35,7 @@ class App extends Component {
       let users = snapshot.val();
       let temp = [];
       for (let item in users) {
-        temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code:item});
+        temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code:item, isSent: users[item].isSent,});
       }
       this.setState({
         allUsers: temp,
@@ -53,68 +53,66 @@ class App extends Component {
   }
 
   incrementTwitter = () => {
-    let oldEmail = "";
-    let oldUsername = "";
-    let oldPoints = 0;
     let fix = true;
-    let oldTwitter;
-    let oldFacebook;
     const data = this.props.firebase.user(this.state.authUser.uid);
     data.on('value', (snapshot) => {
       let user = snapshot.val();
-
       if (fix && user.twitter) {
-        oldPoints = user.points + 1;
-        oldEmail = user.email;
-        oldUsername = user.username;
         fix = false;
-        oldFacebook = user.facebook;
         this.props.firebase.user(this.state.authUser.uid)
           .set({
-            points: oldPoints,
-            email: oldEmail,
-            username: oldUsername,
+            points: user.points + 1,
+            email: user.email,
+            username: user.username,
             twitter: false,
-            facebook: oldFacebook,
+            facebook: user.facebook,
+            isSent: user.isSent,
           });
       }
-
-
     });
   }
 
   incrementFacebook = () => {
-    let oldEmail = "";
-    let oldUsername = "";
-    let oldPoints = 0;
     let fix = true;
-    let oldTwitter;
-    let oldFacebook;
     const data = this.props.firebase.user(this.state.authUser.uid);
     data.on('value', (snapshot) => {
       let user = snapshot.val();
 
       if (fix && user.facebook) {
-        oldPoints = user.points + 1;
-        oldEmail = user.email;
-        oldUsername = user.username;
-        oldTwitter = user.twitter;
         fix = false;
-
         this.props.firebase.user(this.state.authUser.uid)
           .set({
-            points: oldPoints,
-            email: oldEmail,
-            username: oldUsername,
-            twitter: oldTwitter,
+            points: user.points + 1,
+            email: user.email,
+            username: user.username,
+            twitter: user.twitter,
             facebook: false,
+            isSent: user.isSent,
           });
       }
-
-
     });
   }
 
+  changeIsSent=(event,uid)=>{
+    if(event.target.value != null){
+      const data = this.props.firebase.user(uid);
+      data.on('value', (snapshot) => {
+        let user = snapshot.val();
+          this.props.firebase.user(uid)
+            .set({
+              points: user.points,
+              email: user.email,
+              username: user.username,
+              twitter: user.twitter,
+              facebook: user.facebook,
+              isSent: event.target.value,
+            });
+        
+      });
+    }
+    
+  }
+setState
   componentDidMount() {
     this.listener = this.props.firebase.auth.onAuthStateChanged(
       authUser => {
@@ -161,7 +159,7 @@ class App extends Component {
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/FAQ" component={FAQ} />
-              <Route path='/dashboard' component={() => <Dashboard allUsers={this.state.allUsers} />} />
+              <Route path='/dashboard' component={() => <Dashboard allUsers={this.state.allUsers} changeIsSent={this.changeIsSent}/>} />
               <Route path="/" component={() => <Home code={this.state.code} points={this.state.points} authUser={this.state.authUser} incrementFacebook={this.incrementFacebook} incrementTwitter={this.incrementTwitter} />} />
             </Switch>
           </Container>

@@ -4,15 +4,14 @@ import './Dashboard.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const Dashboard = ({ allUsers }) => {
+const Dashboard = ({ allUsers, changeIsSent }) => {
 
-    const[getReward, setReward] = React.useState(true);
-
-    const changeReward = ()=>{
-        if(getReward){
-          alert("Come back soon! =)")
-        }
-    }
+//     const[getTitle, setTitle] = React.useState('N/A');
+// //setReward(false)
+//     const changeTitle = (event, index)=>{
+//         console.log('value', event.target.value);
+//         setTitle(s)
+//     }
 
     return (
         <div className="dashboard">
@@ -27,19 +26,19 @@ const Dashboard = ({ allUsers }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allUsers.map(user => {
+                    {allUsers.map((user, index) => {
+                        //console.log(index)
                         return (
                             <tr>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
                                 <td>{user.points}</td>
                                 <td>
-                                <DropdownButton variant="warning" id="dropdown-item-button" title="N/A">
-                                    <Dropdown.Item as="button">Yes</Dropdown.Item>
-                                    <Dropdown.Item as="button">No</Dropdown.Item>
-                                    <Dropdown.Item as="button">No rewards</Dropdown.Item>
+                                <DropdownButton variant="warning" id="dropdown-item-button" title={user.isSent} key={index} value={user.isSent} onClick={(event) => changeIsSent(event,user.code)}>
+                                    <Dropdown.Item value="Yes" as="button">Yes</Dropdown.Item>
+                                    <Dropdown.Item value="No" as="button">No</Dropdown.Item>
+                                    <Dropdown.Item value="No rewards" as="button">No rewards</Dropdown.Item>
                                 </DropdownButton>
-                               
                                 </td>
                             </tr>
                         )})

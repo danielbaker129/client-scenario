@@ -53,6 +53,7 @@ class SignUpForm extends React.Component {
               points: 0,
               twitter: true,
               facebook: true,
+              isSent: 'No Rewards',
             });
             //set state of code so have to send it as props, set when you sign in or register
             
@@ -63,35 +64,23 @@ class SignUpForm extends React.Component {
 
           if(referralCode.length > 0){
             // alert("here");
-            let oldEmail = "";
-            let oldUsername = "";
-            let oldPoints= 0;
             let fix = true;
-            let oldTwitter;
-            let oldFacebook;
             //referal code: Dj7KCon9uoSR1hFjFQqpDO98o9v2    
             const data = this.props.firebase.user(referralCode);
             data.on('value', (snapshot)=>{
               let user = snapshot.val();
-              
               if(fix){
-                oldPoints = user.points + 1;
-                oldEmail = user.email;
-                oldUsername = user.username;
-                oldTwitter = user.twitter;
-                oldFacebook = user.facebook;
                 fix = false;
                 this.props.firebase.user(referralCode)
               .set({
-                points : oldPoints,
-                email: oldEmail,
-                username: oldUsername,
-                twitter: oldTwitter,
-                facebook: oldFacebook,
+                points : user.points + 1,
+                email: user.email,
+                username: user.username,
+                twitter: user.twitter,
+                facebook: user.facebook,
+                isSent: user.isSent,
               });
               }
-              
-
             });
           }
      

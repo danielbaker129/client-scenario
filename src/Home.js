@@ -124,7 +124,7 @@ class Home extends Component {
                 <h7>
                     Upon signing up / logging in, you'll be able to access your referral code, which you can share with others to gain points -
                     earn enough points, and you can get cool rewards and NormWear swag.<br/><br/>
-                    If you're a first-time user who was directed to this site with a referral code, don't forget to submit a referral code when you sign up!
+                    If you're a first-time user who was directed to this site with a referral code, don't forget to submit the referral code when you sign up!
                 </h7><br/><br/>
                 <h5>Ready to get started? Then sign up or log in to see more!</h5>
                 </div>
