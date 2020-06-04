@@ -94,7 +94,12 @@ class App extends Component {
   }
 
   changeIsSent=(event,uid)=>{
-    if(event.target.value != null){
+    let newIsSent = 'No';
+    if (event === true) {
+      newIsSent='Yes';
+    }
+
+    if(event != null){
       const data = this.props.firebase.user(uid);
       data.on('value', (snapshot) => {
         let user = snapshot.val();
@@ -105,11 +110,12 @@ class App extends Component {
               username: user.username,
               twitter: user.twitter,
               facebook: user.facebook,
-              isSent: event.target.value,
+              isSent: newIsSent,
             });
         
       });
     }
+    // console.log('event', event);
     
   }
 setState
@@ -145,7 +151,7 @@ setState
       isSignIn: false,
       isSignUp: false,
     });
-    console.log("auth user", this.state.authUser);
+    // console.log("auth user", this.state.authUser);
   }
 
   render() {
