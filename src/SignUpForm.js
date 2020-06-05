@@ -54,6 +54,8 @@ class SignUpForm extends React.Component {
               twitter: true,
               facebook: true,
               isSent: 'No Rewards',
+              isAdmin: false,
+              address: '',
             });
             //set state of code so have to send it as props, set when you sign in or register
             
@@ -79,6 +81,8 @@ class SignUpForm extends React.Component {
                 twitter: user.twitter,
                 facebook: user.facebook,
                 isSent: user.isSent,
+                isAdmin: user.isAdmin,
+                address: user.adress,
               });
               }
             });

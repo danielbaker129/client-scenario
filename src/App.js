@@ -12,6 +12,7 @@ import SignInDialog from './SignInForm'
 import { withFirebase } from './Firebase';
 import PrivateRoute from './ProtectedRoute'
 import Dashboard from './Dashboard.js';
+import AddressDialog from './AddressForm.js';
 
 class App extends Component {
   constructor() {
@@ -21,22 +22,27 @@ class App extends Component {
       isSignUp: false,
       isSignIn: false,
       email: "",
-      points: 10,
+      points: 0,
       code: "",
       username: "",
       allUsers: [],
+      isAdmin: false,
+      address: '',
+      showAddressForm: false,
+      fixing: false,
     }
   }
 
   setData = (authUser) => {
     this.setState({ authUser })
     const all = this.props.firebase.users();
-    all.on('value', (snapshot)=>{
+    all.on('value', (snapshot) => {
       let users = snapshot.val();
       let temp = [];
       for (let item in users) {
-        temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code:item, isSent: users[item].isSent,});
+        temp.push({ username: users[item].username, email: users[item].email, points: users[item].points, code: item, isSent: users[item].isSent, });
       }
+
       this.setState({
         allUsers: temp,
       });
@@ -47,7 +53,10 @@ class App extends Component {
       this.setState({
         points: user.points,
         code: this.state.authUser.uid,
-        username: user.username
+        username: user.username,
+        isAdmin: user.isAdmin,
+        address: user.address,
+        fixing: true,
       });
     })
   }
@@ -67,6 +76,8 @@ class App extends Component {
             twitter: false,
             facebook: user.facebook,
             isSent: user.isSent,
+            isAdmin: user.isAdmin,
+            address: user.address,
           });
       }
     });
@@ -77,7 +88,6 @@ class App extends Component {
     const data = this.props.firebase.user(this.state.authUser.uid);
     data.on('value', (snapshot) => {
       let user = snapshot.val();
-
       if (fix && user.facebook) {
         fix = false;
         this.props.firebase.user(this.state.authUser.uid)
@@ -88,21 +98,52 @@ class App extends Component {
             twitter: user.twitter,
             facebook: false,
             isSent: user.isSent,
+            isAdmin: user.isAdmin,
+            address: user.address,
           });
       }
     });
   }
 
-  changeIsSent=(event,uid)=>{
+  // changeAddress=(newAddress)=>{
+  //   alert("got here");
+  //   let fix = true;
+  //   const data = this.props.firebase.user(this.state.authUser.uid);
+
+  //   data.on('value', (snapshot) => {
+  //     let user = snapshot.val();
+  //     if (fix) {
+  //       fix = false;
+  //       this.props.firebase.user(this.state.authUser.uid)
+  //         .set({
+  //           points: user.points,
+  //           email: user.email,
+  //           username: user.username,s
+  //           twitter: user.twitter,
+  //           facebook: user.facebook,
+  //           isSent: user.isSent,
+  //           isAdmin: user.isAdmin,
+  //           address: newAddress,
+  //         });
+  //     }
+  //   });
+  //   this.setState({
+  //     address: newAddress
+  //   })
+  // }
+
+  changeIsSent = (event, uid) => {
     let newIsSent = 'No';
     if (event === true) {
-      newIsSent='Yes';
+      newIsSent = 'Yes';
     }
-
-    if(event != null){
+    let fix = true;
+    if (event != null) {
       const data = this.props.firebase.user(uid);
       data.on('value', (snapshot) => {
         let user = snapshot.val();
+        if (fix) {
+          fix = false;
           this.props.firebase.user(uid)
             .set({
               points: user.points,
@@ -111,14 +152,16 @@ class App extends Component {
               twitter: user.twitter,
               facebook: user.facebook,
               isSent: newIsSent,
+              isAdmin: user.isAdmin,
+              address: user.address,
             });
-        
+        }
       });
     }
     // console.log('event', event);
-    
+
   }
-setState
+  // setState
   componentDidMount() {
     this.listener = this.props.firebase.auth.onAuthStateChanged(
       authUser => {
@@ -146,10 +189,17 @@ setState
     });
   }
 
+  handleAddress = () => {
+    this.setState({
+      showAddressForm: true,
+    })
+  }
+
   onClose = () => {
     this.setState({
       isSignIn: false,
       isSignUp: false,
+      showAddressForm: false
     });
     // console.log("auth user", this.state.authUser);
   }
@@ -158,15 +208,22 @@ setState
     return (
       <Router>
         <div className="edges" style={{ minHeight: "100vh" }}>
-          <Header authUser={this.state.authUser} username={this.state.username} onSignUp={this.onSignUp} onSignIn={this.onSignIn} />
+          <Header authUser={this.state.authUser} username={this.state.username} onSignUp={this.onSignUp} onSignIn={this.onSignIn} isAdmin={this.state.isAdmin} />
           {this.state.isSignUp ? <SignUpDialog onClose={this.onClose} /> : null}
           {this.state.isSignIn ? <SignInDialog onClose={this.onClose} /> : null}
+          {(this.state.showAddressForm && (this.state.fixing)) ? <AddressDialog
+            // changeAddress={this.changeAddress}
+            authUser={this.state.authUser}
+            address={this.state.address}
+            onClose={this.onClose}
+            code={this.state.code} />
+            : null}
           <Container fluid className="text-light" style={{ minHeight: "100vh", width: "80vw" }}>
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/FAQ" component={FAQ} />
-              <Route path='/dashboard' component={() => <Dashboard allUsers={this.state.allUsers} changeIsSent={this.changeIsSent}/>} />
-              <Route path="/" component={() => <Home code={this.state.code} points={this.state.points} authUser={this.state.authUser} incrementFacebook={this.incrementFacebook} incrementTwitter={this.incrementTwitter} />} />
+              <Route path='/dashboard' component={() => <Dashboard allUsers={this.state.allUsers} changeIsSent={this.changeIsSent} isAdmin={this.state.isAdmin} />} />
+              <Route path="/" component={() => <Home address={this.state.address} changeAddress={this.changeAddress} code={this.state.code} points={this.state.points} authUser={this.state.authUser} incrementFacebook={this.incrementFacebook} incrementTwitter={this.incrementTwitter} isAdmin={this.state.isAdmin} handleAddress={this.handleAddress} />} />
             </Switch>
           </Container>
         </div>
